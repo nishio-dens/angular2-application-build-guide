@@ -103,4 +103,9 @@ task :build_all do
   sh "bundle exec rake web"
 end
 
+task :deploy do
+  sh "bundle exec ruby ./scripts/make_dist.rb"
+  sh "./scripts/deploy.sh"
+end
+
 CLEAN.include([BOOK, BOOK_PDF, BOOK_EPUB, BOOK+"-pdf", BOOK+"-epub", WEBROOT])
