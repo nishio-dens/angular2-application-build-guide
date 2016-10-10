@@ -59,8 +59,48 @@ file BOOK_EPUB => SRC do
 end
 
 file WEBROOT => SRC do
+  sh "echo 'start web compile'"
   FileUtils.rm_rf [WEBROOT]
   sh "review-webmaker #{CONFIG_FILE}"
+  generate_my_web_index
+  sh "cp ./js/*.js ./webroot/"
+end
+
+# Indexページに付けるタイトルを指定する
+BOOK_TITLE = "Angular2アプリケーション構築ガイド"
+# WebIndex用のレイアウトファイル
+WEB_INDEX_LAYOUT = "layouts/web-index.html.erb"
+
+def generate_my_web_index
+  require 'review'
+  require 'erb'
+  include ERB::Util
+
+  base_dir = File.dirname(__FILE__)
+  template = open("#{base_dir}/#{WEB_INDEX_LAYOUT}").read
+  @book = ReVIEW::Book.load(base_dir)
+  @title = BOOK_TITLE
+  @erb = ERB.new(template)
+  @toc = @book.chapters.map do |chapter|
+    sections = ReVIEW::TOCParser
+      .chapter_node(chapter)
+      .children
+      .select { |v| v.is_a?(ReVIEW::TOCParser::Section) }
+    {
+      chapter: chapter,
+      sections: sections
+    }
+  end
+  File.open("#{base_dir}/webroot/index.html", "w") do |f|
+    f.write @erb.result
+  end
+end
+
+task :build_all do
+  sh "bundle exec rake clean"
+  sh "bundle exec rake pdf"
+  sh "bundle exec rake epub"
+  sh "bundle exec rake web"
 end
 
 CLEAN.include([BOOK, BOOK_PDF, BOOK_EPUB, BOOK+"-pdf", BOOK+"-epub", WEBROOT])

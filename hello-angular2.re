@@ -9,8 +9,10 @@
 
 == TODOアプリを作ろう
 
-またTODO? しかし他にシンプルで、かつ実用的なサンプルアプリが思いつかん。
+もうTODO作るのは飽きた。
+
+しかし他にシンプルで、かつ実用的なサンプルアプリが思いつかん。
 
 == 環境の構築
 
-angular-cli を使う? webstarter?
+angular-cli を使う webstarter
