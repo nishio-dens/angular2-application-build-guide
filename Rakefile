@@ -67,7 +67,7 @@ file WEBROOT => SRC do
 end
 
 # Indexページに付けるタイトルを指定する
-BOOK_TITLE = "Angular2アプリケーション構築ガイド"
+BOOK_TITLE = "Angularアプリケーション構築ガイド"
 # WebIndex用のレイアウトファイル
 WEB_INDEX_LAYOUT = "layouts/web-index.html.erb"
 
