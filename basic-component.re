@@ -5,3 +5,8 @@
 == Componentとは
 
 blah blah blah
+
+== まとめ
+
+blah blah blah
+
