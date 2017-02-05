@@ -2,6 +2,10 @@ PREDEF:
 
 CHAPS:
   - hello-angular2.re
+  - 基礎編:
+    - basic-component.re
+  - 応用編:
+    - advance-simple-crud-example.re
 
 APPENDIX:
 
