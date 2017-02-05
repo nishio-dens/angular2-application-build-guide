@@ -3,9 +3,15 @@ GEM
   specs:
     ansi (1.5.0)
     ast (2.3.0)
+    coderay (1.1.1)
+    method_source (0.8.2)
     oga (2.7)
       ast
       ruby-ll (~> 2.1)
+    pry (0.10.4)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     rake (11.3.0)
     review (2.0.0)
       rubyzip
@@ -13,12 +19,14 @@ GEM
       ansi
       ast
     rubyzip (1.2.0)
+    slop (3.6.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   oga
+  pry
   rake
   review
 
