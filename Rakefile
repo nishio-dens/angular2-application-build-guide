@@ -81,6 +81,7 @@ def generate_my_web_index
   @book = ReVIEW::Book.load(base_dir)
   @title = BOOK_TITLE
   @erb = ERB.new(template)
+  # FIXME: スマートな方法を考える
   @toc = @book.chapters.map do |chapter|
     sections = ReVIEW::TOCParser
       .chapter_node(chapter)
@@ -91,6 +92,21 @@ def generate_my_web_index
       sections: sections
     }
   end
+
+  # FIXME: 暫定対応 部の始まりがわかるようにmarkをつける
+  basic_start_chapter = @toc
+    .map { |t| t[:chapter] }
+    .group_by { |t| t.name.start_with?('basic-') }[true]
+    .first
+  advance_start_chapter = @toc
+    .map { |t| t[:chapter] }
+    .group_by { |t| t.name.start_with?('advance-') }[true]
+    .first
+  @block_start_chapters = {
+    basic: basic_start_chapter,
+    advance: advance_start_chapter
+  }
+
   File.open("#{base_dir}/webroot/index.html", "w") do |f|
     f.write @erb.result
   end

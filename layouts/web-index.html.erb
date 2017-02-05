@@ -52,6 +52,16 @@
             <h3>目次</h3>
             <ul>
               <% @toc.each.with_index(1) do |content, index| %>
+
+                <% if content[:chapter] == @block_start_chapters[:basic] %>
+                <hr>
+                <h4>基礎編</h4>
+                <% end %>
+                <% if content[:chapter] == @block_start_chapters[:advance] %>
+                <hr>
+                <h4>応用編</h4>
+                <% end %>
+
                 <li class="mb-10">
                   <a href="<%= content[:chapter].id %>.html">
                     第<%= index %>章: <%= content[:chapter].title %>
